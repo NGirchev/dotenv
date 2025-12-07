@@ -16,6 +16,9 @@ public class DotEnvLoader {
 
     private static final Logger log = LoggerFactory.getLogger(DotEnvLoader.class);
 
+    private DotEnvLoader() {
+    }
+
     /**
      * Loads environment variables from .env file into System properties.
      * Does not overwrite existing values in System properties or environment variables.

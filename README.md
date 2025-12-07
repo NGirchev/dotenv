@@ -1,5 +1,10 @@
 # dotenv
 
+[![Build Status](https://github.com/NGirchev/dotenv/workflows/CI/badge.svg)](https://github.com/NGirchev/dotenv/actions)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.ngirchev/dotenv/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.ngirchev/dotenv)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/YOUR_PROJECT_ID)](https://www.codacy.com/gh/NGirchev/dotenv/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=NGirchev/dotenv&amp;utm_campaign=Badge_Grade)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/YOUR_PROJECT_ID/badge)](https://www.bestpractices.dev/projects/YOUR_PROJECT_ID)
+
 Simplest dotenv utility for Java applications. Load environment variables from `.env` files into System properties.
 
 ## Features
@@ -23,7 +28,7 @@ Add the dependency to your `pom.xml`:
 <dependency>
     <groupId>io.github.ngirchev</groupId>
     <artifactId>dotenv</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
@@ -206,31 +211,31 @@ mvn test
 To create a release manually:
 
 ```bash
-mvn release:prepare
-mvn release:perform
+# 1. Prepare release (version and tag)
+mvn -B release:prepare -Darguments="-DskipTests"
+
+# 2. Switch to release tag
+git checkout v1.0.0
+
+# 3. Deploy to Maven Central
+mvn clean deploy -P release -DskipTests
+
+# 4. Push changes and tags
 git push origin master
 git push --tags
 ```
 
-### Automated Release via GitHub Actions
+**Note:** Do NOT use `release:perform`. Use `mvn clean deploy -P release` instead.
 
-The project includes GitHub Actions workflows for automated releases:
+### GitHub Actions
+
+This project uses GitHub Actions for continuous integration:
 
 1. **CI Pipeline** (`.github/workflows/ci.yml`):
-   - Automatically runs on every push and pull request
+   - Runs on every push and pull request
    - Builds the project and runs all tests
 
-2. **Release Pipeline** (`.github/workflows/release.yml`):
-   - Manual trigger via GitHub Actions UI
-   - Go to **Actions** → **Release** → **Run workflow**
-   - Enter:
-     - **Release version**: e.g., `1.0.1` (without SNAPSHOT)
-     - **Next development version**: e.g., `1.0.2-SNAPSHOT`
-   - The workflow will:
-     - Run all tests
-     - Prepare release (remove SNAPSHOT, create tag)
-     - Build and package the release
-     - Push changes and tags to repository
+Releases are performed manually from the command line (see "Manual Release" section above).
 
 ## License
 
@@ -239,3 +244,7 @@ See [LICENSE](LICENSE) file for details.
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Contributors
+
+- [NGirchev](https://github.com/NGirchev) - Creator and maintainer
