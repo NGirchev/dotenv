@@ -194,8 +194,4 @@
             </build>
         </profile>
     </profiles>
-    
-    <activeProfiles>
-        <activeProfile>release</activeProfile>
-    </activeProfiles>
 </project>
