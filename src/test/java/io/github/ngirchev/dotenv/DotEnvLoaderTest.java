@@ -1,4 +1,4 @@
-package ru.girchev.dotenv;
+package io.github.ngirchev.dotenv;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

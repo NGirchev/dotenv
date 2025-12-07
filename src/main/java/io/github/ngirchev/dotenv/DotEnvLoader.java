@@ -1,4 +1,4 @@
-package ru.girchev.dotenv;
+package io.github.ngirchev.dotenv;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

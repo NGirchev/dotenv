@@ -21,7 +21,7 @@ Add the dependency to your `pom.xml`:
 
 ```xml
 <dependency>
-    <groupId>ru.girchev</groupId>
+    <groupId>io.github.ngirchev</groupId>
     <artifactId>dotenv</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
@@ -43,17 +43,17 @@ DATABASE_URL=postgresql://localhost:5432/mydb
 2. Load the environment variables in your application:
 
 ```java
-import ru.girchev.dotenv.DotEnvLoader;
+import io.github.ngirchev.dotenv.DotEnvLoader;
 
 public class App {
     public static void main(String[] args) {
         // Load from default .env file in project root
         DotEnvLoader.loadDotEnv();
-        
+
         // Access variables
         String dbHost = DotEnvLoader.getEnv("DB_HOST");
         String dbPort = DotEnvLoader.getEnv("DB_PORT");
-        
+
         System.out.println("Database: " + dbHost + ":" + dbPort);
     }
 }
@@ -63,7 +63,6 @@ public class App {
 
 ```java
 import java.nio.file.Paths;
-import ru.girchev.dotenv.DotEnvLoader;
 
 // Load from custom path
 DotEnvLoader.loadDotEnv(Paths.get("/path/to/custom/.env"));
@@ -76,7 +75,7 @@ Load environment variables **before** Spring Boot starts. Use a static block in 
 ```java
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import ru.girchev.dotenv.DotEnvLoader;
+import io.github.ngirchev.dotenv.DotEnvLoader;
 
 @SpringBootApplication
 public class Application {
