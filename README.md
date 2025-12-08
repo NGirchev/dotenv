@@ -1,7 +1,7 @@
 # dotenv
 
 [![Build Status](https://github.com/NGirchev/dotenv/workflows/CI/badge.svg)](https://github.com/NGirchev/dotenv/actions)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.ngirchev/dotenv/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.ngirchev/dotenv)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.ngirchev/dotenv)](https://central.sonatype.com/namespace/io.github.ngirchev)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ba880b66c6e848d7ac57505788a14d87)](https://app.codacy.com/gh/NGirchev/dotenv/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/11572/badge)](https://www.bestpractices.dev/projects/11572)
 
