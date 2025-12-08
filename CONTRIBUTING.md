@@ -108,8 +108,8 @@ After successful deployment:
 # Create GitHub release
 gh release create v1.0.0 -F CHANGELOG.md
 
-# Attach signed artifacts (for OpenSSF Security Score)
-gh release upload v1.0.0 target/*.jar.asc --clobber
+# Attach artifacts and their signatures (for OpenSSF Security Score)
+gh release upload v1.0.0 target/*.jar target/*.jar.asc --clobber
 ```
 
 ## GPG Setup

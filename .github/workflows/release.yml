@@ -116,3 +116,32 @@ jobs:
         run: |
           git push origin master
           git push origin --tags
+
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_VERSION: ${{ github.event.inputs.release_version }}
+        run: |
+          set -e
+          gh release create "v$RELEASE_VERSION" \
+            -F CHANGELOG.md \
+            --verify-tag \
+            --title "v$RELEASE_VERSION" \
+            --latest || \
+          gh release edit "v$RELEASE_VERSION" \
+            -F CHANGELOG.md \
+            --title "v$RELEASE_VERSION" \
+            --latest
+
+      - name: Upload signed artifacts to GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_VERSION: ${{ github.event.inputs.release_version }}
+        run: |
+          set -e
+          ARTIFACTS=$(echo target/checkout/target/*.jar target/checkout/target/*.jar.asc || true)
+          if [ -z "$ARTIFACTS" ] || [ "$ARTIFACTS" = "target/checkout/target/*.jar target/checkout/target/*.jar.asc" ]; then
+            echo "No .jar or .jar.asc artifacts found to upload"
+            exit 1
+          fi
+          gh release upload "v$RELEASE_VERSION" $ARTIFACTS --clobber
