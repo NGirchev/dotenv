@@ -38,7 +38,7 @@ jobs:
         run: mvn -B -ntp spotbugs:check
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarcloud-github-action@ba3875ecf642b2129de2b589510c81a8b53dbf4e
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -47,7 +47,7 @@ jobs:
           projectBaseDir: .
 
       - name: Upload coverage reports
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@ab904c41d6ece82784817410c45d8b8c02684457
         with:
           file: ./target/site/jacoco/jacoco.xml
           flags: unittests
