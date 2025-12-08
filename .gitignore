@@ -26,3 +26,7 @@ replay_pid*
 /.idea/vcs.xml
 /target/*
 /.vscode/settings.json
+
+# Maven Release Plugin temporary files
+pom.xml.releaseBackup
+release.properties
