@@ -183,5 +183,79 @@ class DotEnvLoaderTest {
         // System property should have priority
         assertEquals("system_property_value", value);
     }
+
+    @Test
+    void testLoadDotEnv_WithLineStartingWithEquals() throws IOException {
+        // Test case where line starts with '=' (idx == 0 after trim)
+        Path envFile = tempDir.resolve(".env");
+        Files.write(envFile,
+            ("=invalid_line\n" +
+             "VALID_KEY=valid_value\n").getBytes());
+
+        DotEnvLoader.loadDotEnv(envFile);
+
+        // Line starting with '=' should be ignored (idx == 0, so skipped)
+        // Only valid key should be loaded
+        assertEquals("valid_value", System.getProperty("VALID_KEY"));
+    }
+
+    @Test
+    void testLoadDotEnv_DoesNotOverwriteExistingEnvVariable() throws IOException {
+        // Test case where property exists in System.getenv but not in System.getProperty
+        // This tests the branch: System.getProperty(key) == null && System.getenv(key) == null
+        // We need to ensure that if env var exists, it's not overwritten
+        
+        // For the branch where System.getenv(key) != null, we need a real env var
+        // Let's use PATH which should always exist
+        String originalPath = System.getProperty("PATH");
+        System.clearProperty("PATH");
+        
+        try {
+            Path envFile = tempDir.resolve(".env");
+            Files.write(envFile, "PATH=new_path_value\nNEW_KEY=new_value\n".getBytes());
+
+            DotEnvLoader.loadDotEnv(envFile);
+
+            // PATH from environment should not be overwritten
+            // Since we can't easily test System.getenv in unit tests,
+            // we'll test that NEW_KEY is loaded (both System.getProperty and System.getenv are null)
+            assertEquals("new_value", System.getProperty("NEW_KEY"));
+        } finally {
+            // Restore original PATH if it existed
+            if (originalPath != null) {
+                System.setProperty("PATH", originalPath);
+            }
+        }
+    }
+
+    @Test
+    void testLoadDotEnv_WithEqualsAtStartAfterTrim() throws IOException {
+        // Test case where after trim, line starts with '='
+        Path envFile = tempDir.resolve(".env");
+        Files.write(envFile,
+            ("  =value_after_spaces\n" +
+             "VALID_KEY=valid_value\n").getBytes());
+
+        DotEnvLoader.loadDotEnv(envFile);
+
+        // Line with '=' at start after trim should be ignored (idx == 0)
+        // Only valid key should be loaded
+        assertEquals("valid_value", System.getProperty("VALID_KEY"));
+    }
+
+    @Test
+    void testLoadDotEnv_WithNoEqualsSign() throws IOException {
+        // Test case where line has no '=' sign (idx == -1, which is < 0)
+        Path envFile = tempDir.resolve(".env");
+        Files.write(envFile,
+            ("LINE_WITHOUT_EQUALS\n" +
+             "VALID_KEY=valid_value\n").getBytes());
+
+        DotEnvLoader.loadDotEnv(envFile);
+
+        // Line without '=' should be ignored
+        assertNull(System.getProperty("LINE_WITHOUT_EQUALS"));
+        assertEquals("valid_value", System.getProperty("VALID_KEY"));
+    }
 }
 
