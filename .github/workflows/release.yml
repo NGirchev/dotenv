@@ -36,6 +36,7 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
       - name: Import GPG key
         env:
@@ -89,6 +90,7 @@ jobs:
             -DreleaseVersion=$RELEASE_VERSION \
             -DdevelopmentVersion=$NEXT_VERSION \
             -Dtag=v$RELEASE_VERSION \
+            -Dscm.url=https://github.com/${{ github.repository }}.git \
             -Darguments="-DskipTests" \
             -B
 
@@ -101,5 +103,5 @@ jobs:
       - name: Push changes and tags
         run: |
           git push origin master
-          git push --tags
+          git push origin --tags
 
