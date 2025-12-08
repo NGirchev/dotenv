@@ -79,18 +79,24 @@ jobs:
       - name: Run tests
         run: mvn clean test
 
+      - name: Verify git remote
+        run: |
+          git remote -v
+          git config --get remote.origin.url
+
       - name: Prepare release
         env:
           RELEASE_VERSION: ${{ github.event.inputs.release_version }}
           NEXT_VERSION: ${{ github.event.inputs.next_version }}
           MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mvn release:prepare \
             -DreleaseVersion=$RELEASE_VERSION \
             -DdevelopmentVersion=$NEXT_VERSION \
             -Dtag=v$RELEASE_VERSION \
-            -Dscm.url=https://github.com/${{ github.repository }}.git \
+            -Dscm.url=scm:git:https://x-access-token:$GITHUB_TOKEN@github.com/${{ github.repository }}.git \
             -Darguments="-DskipTests" \
             -B
 
@@ -98,7 +104,11 @@ jobs:
         env:
           MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-        run: mvn release:perform -B
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mvn release:perform \
+            -Dscm.url=scm:git:https://x-access-token:$GITHUB_TOKEN@github.com/${{ github.repository }}.git \
+            -B
 
       - name: Push changes and tags
         run: |
