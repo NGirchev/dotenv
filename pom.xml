@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.ngirchev</groupId>
     <artifactId>dotenv</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <name>dotenv</name>
     <description>Simplest dotenv utility for Java applications. Load environment variables from .env files into System properties.</description>
