@@ -49,7 +49,7 @@ The library is available on [Maven Central](https://central.sonatype.com/namespa
 <dependency>
     <groupId>io.github.ngirchev</groupId>
     <artifactId>dotenv</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
