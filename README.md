@@ -5,7 +5,15 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ba880b66c6e848d7ac57505788a14d87)](https://app.codacy.com/gh/NGirchev/dotenv/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/11572/badge)](https://www.bestpractices.dev/projects/11572)
 [![SonarCloud Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=NGirchev_dotenv&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=NGirchev_dotenv)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=NGirchev_dotenv&metric=coverage)](https://sonarcloud.io/summary/new_code?id=NGirchev_dotenv)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=NGirchev_dotenv&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=NGirchev_dotenv)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=NGirchev_dotenv&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=NGirchev_dotenv)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=NGirchev_dotenv&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=NGirchev_dotenv)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=NGirchev_dotenv&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=NGirchev_dotenv)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=NGirchev_dotenv&metric=bugs)](https://sonarcloud.io/summary/new_code?id=NGirchev_dotenv)
+[![Duplicated Lines](https://sonarcloud.io/api/project_badges/measure?project=NGirchev_dotenv&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=NGirchev_dotenv)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=NGirchev_dotenv&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=NGirchev_dotenv)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=NGirchev_dotenv&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=NGirchev_dotenv)
+
 
 A simple Java library that helps you manage application configuration securely. Instead of hardcoding sensitive information like database passwords, API keys, or server addresses directly in your code, you can store them in a `.env` file. This keeps your secrets safe, prevents accidentally committing them to version control, and makes it easy to configure your application for different environments (development, testing, production).
 
